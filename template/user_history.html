@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SkinTech</title>
+
+		<!-- css code for bootstrap -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+		<!-- Js code for bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+		{% load staticfiles %}
+		<link rel='stylesheet' href="{% static 'index.css'%}" type='text/css'/>
+
+
+	</head>
+
+	<body>
+
+		<div class="nav">
+			<div class="title"> SkinTech </div>
+			<ul>
+				<li> <a href="{% url 'user_upload_image' %}"> Upload Image </a> </li>
+				<li> <a href="{% url 'user_history' %}">History </a></li>
+				<li> <a href="#">Profile </a></li>
+				<li> <a href="{% url 'user_logout' %}">Logout </a></li>
+			</ul>
+
+		</div>
+
+		<div class="back user_history">
+			<h2 style="text-align: center;"> History </h2>
+
+			<div class="container col-lg-7 col-10" >
+				<table class="table">
+				  <thead class="thead-dark">
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col" nowrap>date</th>
+				      <th scope="col">Image</th>
+				      <th scope="col">Status</th>
+				      <th scope="col">Delete</th>
+				    </tr>
+				  </thead>
+
+				  {% for individual in history %}
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td nowrap>{{individual.date}}</td>
+
+				      {% load static %}
+				      <td> <img src="{{individual.image.url}}"/> </td>
+				      <td>{{individual.status}}</td>
+				      <td> 
+				      	<a href="{% url 'user_history_delete' id=individual.id %}" class="btn btn-danger">Delete</a>
+				      </td>
+				    </tr>
+				  </tbody>
+				  {% endfor %}
+
+				</table>
+
+				<div class="pagination">
+					<span class="step-links">
+				        {% if history.has_previous %}
+				            <a href="?page=1">&laquo; first</a>
+				            <a href="?page={{ history.previous_page_number }}">previous</a>
+				        {% endif %}
+
+				        <span class="current">
+				            Page {{ history.number }} of {{ history.paginator.num_pages }}
+				        </span>
+
+				        {% if history.has_next %}
+				            <a href="?page={{ history.next_page_number }}">next</a>
+				            <a href="?page={{ history.paginator.num_pages }}">last &raquo;</a>
+				        {% endif %}
+				    </span>
+				</div>
+
+				<iframe width="450" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" allowtransparency="true" src="https://chatroll.com/embed/chat/w8z5?id=Rs47PO_VWnN&platform=html"></iframe>
+
+			</div>
+
+		</div>
+
+		
+
+		<footer>
+			
+
+		</footer>
+
+	</body>
+
+</html>

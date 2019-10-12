@@ -1,0 +1,111 @@
+.nav{
+	width: 100%;
+	background:lightgrey;
+	padding-top: 8px;
+	color:white;
+}
+.nav .title{
+	color: maroon;
+	font-size: 26px;
+	margin-left: 20px;
+	margin-top: -5px;
+}
+
+.nav ul li{
+	float: left;
+	list-style-type: none;
+	margin-left: 30px;
+	cursor: pointer;
+}
+.nav ul li a{
+	color: white;
+}
+
+.nav ul li a:hover{
+	color: maroon;
+	text-decoration: underline;
+}
+
+.back{
+	background: lightgrey url('/static/background2.jpeg');
+	min-height: 700px;
+	width:100%;
+}
+
+.homepage_main h1{
+	text-align: center;
+	margin-top: 50px;
+}
+
+.login{
+	width: 500px;
+	margin:auto;
+	border:2px double lightgrey;
+	padding:20px;
+	margin-top: 100px;
+	background-color: white;
+}
+.login button{
+	margin-top: 10px;
+}
+
+.user_upload_image{
+	margin-top: 60px;
+}
+.user_upload_image h1{
+	text-align: center;
+}
+
+.user_upload_image .imgShow{
+	width: 100%;
+	height: auto;
+	min-height: 300px;
+	border:2px solid grey;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background-color: white;
+}
+
+.user_upload_image input{
+	max-width: 400px;
+}
+.user_upload_image button{
+	float: left;
+}
+.user_upload_image #preview{
+	max-width: 80%;
+	margin:auto;
+	display: block;
+}
+.image_result{
+	margin-top: 80px;
+}
+
+
+.user_history{
+	overflow-x: auto;
+}
+.user_history h2{
+	margin-top: 20px;
+}
+.user_history table{
+	margin-top: 20px;
+	background-color: white;
+	border:1px solid grey;
+	width: 100%;
+	margin-bottom: 10px;
+}
+.user_history table tr{
+}
+.user_history table img{
+	max-width: 80%;
+}
+
+footer{
+	background-color: grey;
+	width: 100%;
+	height: 200px;
+	margin-top: 50px;
+}
+
+
