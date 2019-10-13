@@ -1,100 +1,72 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>SkinTech</title>
+{% extends 'base.html' %}
 
-		<!-- css code for bootstrap -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% block body %}
 
-		<!-- Js code for bootstrap -->
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<div class="back user_upload_image">
+	<div class="container col-lg-5 col-10" >
+		{% if messages %}
+			   {% for message in messages %}
+				   {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+				   <div class="alert alert-success" role="alert" style='margin-bottom: 10px;margin-top: 10px;'>{{ message }}</div> 
+				   {% endif %}
+			   {% endfor %}
+		{% endif %}
 
-		{% load staticfiles %}
-		<link rel='stylesheet' href="{% static 'index.css'%}" type='text/css'/>
+		<h1> Upload Image To Analyze </h1>
+		<span style="text-align: center;display: block;color: grey;"> Be carefull with the focus of the image because it can cause wrong results <hr/></span>
 
-
-	</head>
-
-
-	<body>
-
-		<div class="nav">
-			<div class="title"> SkinTech </div>
-			<ul>
-				<li> <a href="{% url 'user_upload_image' %}"> Upload Image </a> </li>
-				<li> <a href="{% url 'user_history' %}">History </a></li>
-				<li> <a href="#">Profile </a></li>
-				<li> <a href="{% url 'user_logout' %}">Logout </a></li>
-			</ul>
-
-
+		<div class="imgShow">
+			<img id="preview" />
 		</div>
 
-		<div class="back user_upload_image">
-			<div class="container col-lg-5 col-10" >
-				<h1> Upload Image To Analyze </h1>
-				<span style="text-align: center;display: block;color: grey;"> Be carefull with the focus of the image because it can cause wrong results <hr/></span>
-
-				<div class="imgShow">
-					<img id="preview" />
-				</div>
-
-				<form method="post" action="{% url 'user_upload_image' %}" enctype="multipart/form-data">
-					{% csrf_token %}
-					<div class="form-group">
-					  <label for="image">Upload image</label>
-					  <input type="file" class="form-control" id="image"  placeholder="image" name="image"  autocomplete="off" onchange="readURL(this);">
-					</div>
-
-					{% if messages %}
-					   {% for message in messages %}
-						   {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<div class="alert alert-danger" role="alert" style='margin-bottom: 10px;margin-top: 10px;'>{{ message }}</div> 
-						   {% else %}
-						   <div class="alert alert-success" role="alert" style='margin-bottom: 10px;margin-top: 10px;'>{{ message }}</div> 
-						   {% endif %}
-					   {% endfor %}
-					{% endif %}
-
-					<button type="submit" class="btn btn-primary" style="margin-top: 10px;" name="submit" value="upload">Upload</button>
-
-				</form>
-
-				<div class="image_result">
-					<h4> Result : </h4>
-					<img src="{{image.url}}" style="max-width: 300px;height: auto;"/>
-					<div> {{result}} </div>
-				</div>
-
+		<form method="post" action="{% url 'user_upload_image' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="form-group">
+			  <label for="image">Upload image</label>
+			  <input type="file" class="form-control" id="image"  placeholder="image" name="image"  autocomplete="off" onchange="readURL(this);">
 			</div>
 
-			
+			{% if messages %}
+			   {% for message in messages %}
+				   {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<div class="alert alert-danger" role="alert" style='margin-bottom: 10px;margin-top: 10px;'>{{ message }}</div> 
+				  	{% endif %}
+			   {% endfor %}
+			{% endif %}
+
+			<button type="submit" class="btn btn-primary" style="margin-top: 10px;" name="submit" value="upload">Upload</button>
+
+		</form>
+
+		<div class="image_result">
+			<h4> Result : </h4>
+			<img src="{{image.url}}" style="max-width: 300px;height: auto;"/>
+			<div> {{result}} </div>
 		</div>
 
+	</div>
+
+	
+</div>
+
 		
+{% endblock %}
 
-		<footer>
-			
 
-		</footer>
-
-	</body>
-
-</html>
-
+{% block script %}
 <script type="text/javascript">
-	 function readURL(input) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
+ function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-	        reader.onload = function (e) {
-	            $('#preview')
-	                .attr('src', e.target.result);
-	        };
+        reader.onload = function (e) {
+            $('#preview')
+                .attr('src', e.target.result);
+        };
 
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-	</script>
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+{% endblock %}
+
 

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="back user_profile">
+	<h2 style="text-align: center;margin-top: 30px;"> My Profile </h2>
+
+	<div class="container " style="margin:auto;display: block;border:2px double lightgrey;width: 500px;padding:20px;margin-top: 40px;font-size: 22px;">
+		<div class="profile_content" style="margin:auto;display: block;text-align: center;">
+			<img src='https://news.anz.com/etc/designs/bluenotes/images/default-author-image@2x.jpg' style="width: 300px;height:auto;border-radius: 50%;"/>
+			<br/>
+			<div style="margin-top: 20px;">type : <strong>patient</strong></div>
+			<div> username : <strong>{{user}}</strong> </div>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

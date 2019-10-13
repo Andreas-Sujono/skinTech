@@ -30,7 +30,10 @@ urlpatterns = [
     path('user/history/',user_history_view,name='user_history'),
     path('user/profile/',user_profile_view,name='user_profile'),
     path('logout/',user_logout,name='user_logout'),
-    path('user/history/delete/<int:id>',user_history_delete, name='user_history_delete')
+    path('user/history/delete/<int:id>',user_history_delete, name='user_history_delete'),
+
+    path('user/consultation',user_consultation_view,name='user_consultation'),
+    path('user/profile',user_profile_view,name='user_profile')
 ] 
 
 if settings.DEBUG:

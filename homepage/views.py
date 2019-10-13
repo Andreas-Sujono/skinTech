@@ -45,6 +45,13 @@ def user_upload_image_view(request):
 			image = request.FILES['image']
 			print('file retrieved')
 
+			#validation of image type
+			imageType = ['jpg']
+			if(str(image.name)[-3:] not in imageType):
+				messages.error(request, 'only jpg file allowed')
+				return redirect('/user/upload-image')
+
+
 			now = timezone.now()
 
 			history = History_image(
@@ -56,7 +63,7 @@ def user_upload_image_view(request):
 
 			history.save()
 
-			messages.success(request, 'upload successful')
+			messages.success(request, 'upload successful, see the result below')
 			return render(request,'user_upload_image.html', {'result':'null','image':history.image})
 
 
@@ -73,7 +80,7 @@ def user_upload_image_view(request):
 def user_history_view(request):
 	history_list = History_image.objects.filter(user=request.user)
 
-	paginator = Paginator(history_list, 5)
+	paginator = Paginator(history_list, 3)
 
 	page = request.GET.get('page')
 	history = paginator.get_page(page)
@@ -90,6 +97,14 @@ def user_history_delete(request, id):
 @login_required
 def user_profile_view(request):
 	return render(request,'user_profile.html', {})
+
+@login_required
+def user_consultation_view(request):
+	return render(request,'user_consultation.html', {})
+
+@login_required
+def user_profile_view(request):
+	return render(request, 'user_profile.html', {'user':request.user})
 
 
 @login_required
