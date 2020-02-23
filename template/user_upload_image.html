@@ -40,7 +40,12 @@
 		<div class="image_result">
 			<h4> Result : </h4>
 			<img src="{{image.url}}" style="max-width: 300px;height: auto;"/>
-			<div> {{result}} </div>
+			<div>
+				{% if result %} 
+					<div> percentage malignant: {{result.percent_malignant}}</div>
+					<div> perecentage benign : {{result.percent_benign}}</div>
+				{% endif %}
+			</div>
 		</div>
 
 	</div>
